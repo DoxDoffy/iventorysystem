@@ -1,0 +1,12 @@
+https://github.com/Kinotosi/web-crud-basic-flask-mysql/blob/main/app.py
+
+database name:-
+=tnp_iventory
+
+table inside database:-
+
+#recordstorage:
+=no_storage, id_storage, detail_storage, quantity_storage, remark_storage
+
+#recordincoming:
+=no_incoming, rdate_incoming, rby_incoming, i_incoming, desc_incoming, serial_incoming, qty_incoming, remark_incoming
