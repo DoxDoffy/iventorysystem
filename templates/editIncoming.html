@@ -1,0 +1,77 @@
+{% extends 'baseindex.html' %}
+
+{% block title %} Incoming Item {% endblock %}
+
+{% block header %} Add New Item {% endblock %}
+
+{% block body %}
+<div class="top-header">
+    <a href="https://www.analog.com/en/about-adi.html" class="logo"><i class='bx bx-play-circle' ></i>ADI.Penang</a>
+    
+    <ul class="navlist">
+        <li><a href="{{ url_for ('baseindex')}}" class="active">Homepage</a></li>
+        <li><a href="#" class="#">About</a></li>
+        <li><a href="#" class="#"></a></li>
+        <li><a href="#" class="#"></a></li>
+    </ul>
+
+    <div class="h-main">    
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <div id="darkmode"></div>
+    </div>
+</div>
+
+<div class="sec2">
+    <div class="sec1">
+        <h1>Edit Incoming Item Details</h1>
+    </div>
+
+    <div class="form-add">
+        <form class="form-add-in" action="{{ url_for ('editIncomingprocess')}}" style="text-transform:uppercase" method="post">
+            <a class="t-graybtn" href="{{ url_for ('viewIncoming')}}">View Record</a>
+        
+            <div class="form-label">
+                <label>Received Date:</label>
+                <input type="hidden" name="no_incoming" value="{{ data.no_incoming}}">   
+                <input type="hidden" name="rdate_incoming" value="{{ data.no_incoming}}">
+                <h3>{{ data.rdate_incoming }}</h3>   
+            </div>
+
+            <div class="form-label">
+                <label>Received By:</label>
+                <input class="form-text" type="text" name="rby_incoming" id="rby_incoming" value="{{ data.rby_incoming }}"></td>
+            </div>
+
+            <div class="form-label">
+                <label>PO# /DO#/ AWB# (IF Receive item from store):</label>
+                <input class="form-text" type="text" name="i_incoming" id="i_incoming" value="{{ data.i_incoming }}"></td>
+            </div>
+            
+            <div class="form-label">
+                <label>Description:</label>
+                <input class="form-text" type="text" name="desc_incoming" id="desc_incoming" value="{{ data.desc_incoming }}"></td>
+            </div>
+
+            <div class="form-label">
+                <label>Item Serial Number / Part Number (IF any):</label>
+                <input class="form-text" type="text" name="serial_incoming" id="serial_incoming" value="{{ data.serial_incoming }}"></td>
+            </div>
+
+            <div class="form-label">
+                <label>Qty:</label>
+                <input class="form-text" type="text" name="qty_incoming" id="qty_incoming" value="{{ data.qty_incoming }}"></td>
+            </div>
+
+            <div class="form-label">
+                <label>Remarks:</label>
+                <textarea class="form-textarea" name="remark_incoming" id="remark_incoming">{{ data.remark_incoming }}</textarea>
+            </div>
+
+            <div class="form-label">
+                <button class="h-btn" type="submit" name="submit">Confirm</button>&nbsp;
+                <button class="t-graybtn" href="{{ url_for ('viewStorage')}}">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
