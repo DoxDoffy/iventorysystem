@@ -1,0 +1,72 @@
+{% extends 'baseindex.html' %}
+
+{% block title %} HDD's Record {% endblock %}
+
+{% block header %} Record List of HDDs {% endblock %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                
+                     {{ message }}
+                    
+            {% endfor %}
+        {% endif%}
+    {% endwith %}
+<div class="sec2">
+    <div class="sec1">
+        <h1>LIST OF INCOMING ITEMS</h1>
+    </div>
+
+    <div class="sec2-btn">
+        <a class="h-btn" href="{{ url_for ('export_reportIncoming')}}">Generate Report in Excel Format</a>&nbsp;
+        <a class="t-graybtn" href="{{ url_for ('addIncoming')}}">Add Manually!</a> 
+        <a class="t-graybtn" href="{{ url_for ('csvIncoming')}}">Add Automatically!</a>
+    </div>
+
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Received Date (Y-M-D)</th>
+                    <th>Received By</th>
+                    <th>PO# /DO#/ AWB# (IF Receive item from store)</th>
+                    <th>Desc</th>
+                    <th>Item Serial Number / Part Number (IF any)</th>
+                    <th>Qty</th>
+                    <th>Remarks</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+ 
+<div class="sec2-2">
+    <div class="tbl-content">
+         <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                {% for recordincoming in data %}  
+                <tr class="tr-hover">  
+                    <th>{{ loop.index }}</th>
+                    <td>{{ recordincoming.rdate_incoming }}</td>  
+                    <td>{{ recordincoming.rby_incoming }}</td>  
+                    <td>{{ recordincoming.i_incoming }}</td>  
+                    <td>{{ recordincoming.desc_incoming }}</td>  
+                    <td>{{ recordincoming.serial_incoming }}</td>
+                    <td>{{ recordincoming.qty_incoming }}</td>
+                    <td>{{ recordincoming.remark_incoming }}</td>
+                    <td>
+                        <a class="t-btn-edit" href="{{ url_for ('editIncoming', no_incoming= recordincoming.no_incoming)}}">Edit</a>
+                        <a class="t-btn-delete" href="{{ url_for ('deleteIncoming', no_incoming= recordincoming.no_incoming)}}" onclick="return confirm('Delete this data?')">Delete</a>
+                    </td>  
+                </tr>  
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

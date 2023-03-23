@@ -1,0 +1,55 @@
+
+{% extends 'baseindex.html' %}
+    {% block title %} Menu Page {% endblock %}
+
+
+    {% block body %}
+        <!-- start-flash message -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                        
+                        {{ message }}
+                            
+                {% endfor %}
+            {% endif%}
+        {% endwith %}
+        <!-- end-flash message -->
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>InventorySystem</h1>
+            <h4>Trim & Probe - {{session.username}}</h4>
+            <p>Inventory System is a websystem that holds and track items data in storage including incoming items.  </p>
+            <div class="hero-in">
+                <a href="{{ url_for ('viewIncoming')}}">
+                <div class="box">
+                    <h3>Incoming Items</h3>
+                    <h5>View Record</h5>
+                    <img src="{{ url_for('static', filename='img/inventory.png')}}" width = "80" height = "60">
+                </div>
+                </a>
+
+                <a href="{{ url_for ('viewStorage')}}">
+                <div class="box">
+                    <h3>Tracking Item</h3>
+                    <h5>View Record</h5>
+                    <img src="{{ url_for('static', filename='img/stock.png')}}" width = "80" height = "60">
+                </div>
+                </a>
+
+                <a href="{{ url_for ('guide')}}">
+                <div class="box">
+                    <h3 >Guide</h3>
+                    <h5>User Manual</h5>
+                    <img src="{{ url_for('static', filename='img/manual.png')}}" width = "70" height = "70">
+                </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-img">
+            <img src="{{ url_for('static', filename='img/mainpic.png')}}">
+        </div>
+    </section>
+    {% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'baseindex.html' %}
+
+{% block title %} Import CSV {% endblock %}
+
+{% block header %} Add Your Excel Data Here! {% endblock %}
+
+{% block body %}
+<div class="sec2">
+    <div class="sec1">
+        <h1>IMPORT EXCEL FILE</h1>
+    </div>
+
+    <div class="sec2-btn">
+        <a class="t-graybtn" href="{{ url_for ('viewIncoming')}}">View Record</a>
+    </div>
+
+    <div class="sec2">
+        <div class="form-add-incsv"> 
+            <form action="incomingexcel" method="POST" enctype="multipart/form-data">
+                <div class="drop-label">
+                    <label class="drop-container">
+                        <span class="drop-title">Drop file.CSV here</span>
+                        or
+                        <input type="file" id="file" name="file" required>
+                    </label>
+                </div>
+                <div class="btn-incsv">
+                    <button class="h-btn" type="submit" name="" value="submit">Submit File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
