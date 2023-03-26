@@ -26,8 +26,10 @@
             <li><a href="#" class="#"></a></li>
         </ul>
 
+        {% if request.path == url_for('homepage') %}
         <div class="h-main">
-            <a href="{{ url_for ('logout')}}" class="h-btn">Log Out</a>      
+            <a href="{{ url_for ('logout')}}" class="h-btn">Log Out</a> 
+            {% endif %}     
             <div class="bx bx-menu" id="menu-icon"></div>
             <div id="darkmode"></div>
         </div>
