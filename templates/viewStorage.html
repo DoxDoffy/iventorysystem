@@ -6,15 +6,15 @@
 
 {% block body %}
 
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            {% for message in messages %}
-                
-                     {{ message }}
-                    
+        <ul class="flashes">
+            {% for message in messages %} 
+            <li class="{{ category }}">{{ message }}</li>    
             {% endfor %}
         {% endif%}
     {% endwith %}
+    
 <div class="sec2">
     <div class="sec1">
        <h1>SPARE-PART TRACKING</h1>
@@ -25,6 +25,14 @@
         <a class="t-graybtn" href="{{ url_for ('addStorage')}}">Add Manually!</a> 
         <a class="t-graybtn" href="{{ url_for ('csvStorage')}}">Add Automatically!</a>
     </div>
+
+    <form method="GET">
+        <div class="">
+            <label for="search">Search by id_storage:</label>
+            <input type="text" name="search" id="search" value="{{ search }}">
+        </div>
+        <button type="submit">Search</button>
+    </form>
         
     <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -46,7 +54,7 @@
 <div class="sec2-2">
     <div class="tbl-content">
          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
+            <tbody id="tableBody">
                 {% for recordstorage in data %}   
                 <tr class="tr-hover">  
                     <th>{{ loop.index }}</th> 
@@ -60,8 +68,8 @@
                         <a class="t-btn-delete" href="{{ url_for('deleteStorage', no_storage= recordstorage.no_storage) }}" onclick="return confirm('Delete this data?')">Delete</a>
                     </td>   
                 </tr> 
+                {% endfor %} 
             </tbody> 
-            {% endfor %} 
         </table>
     </div>
 </div>
