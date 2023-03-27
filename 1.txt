@@ -1,0 +1,34 @@
+
+@app.route("/viewStorage/csvStorage") 
+@login_required
+def csvStorage():
+    return render_template('csvStorage.html')
+    #viewStorage=> Read & Save CSV file/data to database
+@app.route("/viewStorage/storageexcel", methods=['POST'])
+@login_required
+def storageexcel():
+      # get the uploaded file
+    uploaded_file = request.files['file']
+    if uploaded_file.filename != '':
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+        # set the file path
+        uploaded_file.save(file_path)
+        parseCSV(file_path)
+        # save the file
+    return redirect(url_for('viewStorage'))
+
+def parseCSV(filePath):
+    # CSV Column Names
+    # line_storage, testertype_storage, id_storage, detail_storage, quantity_storage, remark_storage
+    col_names = ['id_storage', 'env_storage', 'detail_storage', 'quantity_storage', 'remark_storage']
+    # Use Pandas to parse the CSV file
+    # skiprow will skip firstrow(header)
+    # use the "merge_cells" parameter to handle merged cells
+    csvData = pd.read_excel(filePath, names=col_names, skiprows=1, merge_cells=True)
+    # Loop through the Rows
+    for i, row in csvData.iterrows():
+        sql = "INSERT INTO recordstorage (id_storage, env_storage, detail_storage, quantity_storage, remark_storage) VALUES (%s, %s, %s, %s, %s)"
+        value = (row['id_storage'], row['env_storage'], row['detail_storage'], row['quantity_storage'], row['remark_storage'])
+        mycursor.execute(sql, value)
+        mydb.commit()
+        print(i, row['id_storage'], row['env_storage'], row['detail_storage'], row['quantity_storage'], row['remark_storage'])
