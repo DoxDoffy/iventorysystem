@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    {% if not session.loggedin %}
+    <p>You must be logged in to access this page.</p>
+    {% else %}
+    <h2>Welcome to the Dashboard, {{ session.username }}!</h2>
+    <p>This is your dashboard.</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+</body>
+</html>
