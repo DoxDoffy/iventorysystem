@@ -1,0 +1,32 @@
+var viewBtns = document.getElementsByClassName("btn-view");
+
+// open modal
+var btns = document.querySelectorAll(".btn-view");
+btns.forEach(function(btn) {
+  btn.onclick = function() {
+    var modalId = this.id.replace("myBtn", "myModal-");
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+  };
+});
+
+// Get all close buttons
+var closeBtns = document.querySelectorAll(".close");
+
+// close modal
+closeBtns.forEach(function(closeBtn) {
+  closeBtn.onclick = function() {
+    var modal = this.parentElement.parentElement;
+    modal.style.display = "none";
+  };
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target.classList.contains("modal")) {
+    event.target.style.display = "none";
+  }
+};
+
+                         
+
