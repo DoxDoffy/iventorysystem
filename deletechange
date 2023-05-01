@@ -1,0 +1,48 @@
+#delete data 1
+def deleteStorage(id_storage):
+    data_recordstorage = recordstorage.query.get(id_storage)
+    env_storage = data_recordstorage.env_storage
+    detail_storage = data_recordstorage.detail_storage
+    quantity_storage = data_recordstorage.quantity_storage
+    remark_storage = data_recordstorage.remark_storage
+    
+    db.session.delete(data_recordstorage)
+    db.session.commit()
+    
+    new_recordstorage = recordstorage(id_storage=id_storage, env_storage='', detail_storage='', quantity_storage='', remark_storage='')
+    db.session.add(new_recordstorage)
+    db.session.commit()
+
+    flash('Delete Data Success (except for id_storage)!')
+
+    return redirect(url_for('viewStorage'))
+
+#delete data 2
+def deleteStorage(id_storage):
+    data_recordstorage = recordstorage.query.get(id_storage)
+    if data_recordstorage is None:
+        flash(f"Record with id {id_storage} does not exist")
+        return redirect(url_for('viewStorage'))
+
+    env_storage = data_recordstorage.env_storage
+    detail_storage = data_recordstorage.detail_storage
+    quantity_storage = data_recordstorage.quantity_storage
+    remark_storage = data_recordstorage.remark_storage
+    
+    db.session.delete(data_recordstorage)
+    db.session.commit()
+    
+    new_recordstorage = recordstorage(
+        id_storage=id_storage,
+        env_storage='',
+        detail_storage='',
+        quantity_storage='',
+        remark_storage=''
+    )
+    db.session.add(new_recordstorage)
+    db.session.commit()
+
+    flash('Delete Data Success (except for id_storage)!')
+
+    return redirect(url_for('viewStorage'))
+
