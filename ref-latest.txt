@@ -1,0 +1,59 @@
+#html
+<div class="form-label">
+    <label>Quantity:</label>
+    <div class="increment-decrement">
+        <button type="button" id="decrement">-</button>
+        <input class="form-text" type="text" name="quantity_storage" id="quantity_storage" value="{{ data.quantity_storage }}">
+        <button type="button" id="increment">+</button>
+    </div>
+</div>
+
+#js
+var quantityInput = document.getElementById("quantity_storage");
+var decrementButton = document.getElementById("decrement");
+var incrementButton = document.getElementById("increment");
+
+decrementButton.addEventListener("click", function() {
+    if (quantityInput.value > 0) {
+        quantityInput.value--;
+    }
+});
+
+incrementButton.addEventListener("click", function() {
+    quantityInput.value++;
+});
+
+#css
+.increment-decrement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.increment-decrement button {
+    width: 40px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #ccc;
+    color: #fff;
+    cursor: pointer;
+}
+
+.increment-decrement button:hover {
+    background-color: #aaa;
+}
+
+.increment-decrement button:active {
+    background-color: #888;
+}
+
+.increment-decrement input {
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
