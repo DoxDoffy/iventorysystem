@@ -1,0 +1,70 @@
+#js
+<div class="form-label quantity-container">
+  <label>Quantity:</label>
+  <div>
+    <a class="quantity-button" href="#" onclick="decrementQuantity()">-</a>
+    <input class="quantity-input" type="number" name="quantity_storage" id="quantity_storage" value="{{ data.quantity_storage }}">
+    <a class="quantity-button" href="#" onclick="incrementQuantity()">+</a>
+  </div>
+</div>
+
+#css
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  transition: all 0.3s ease;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.quantity-button:hover {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #333;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+#html
+<script>
+  // Get the quantity input field and increment/decrement buttons
+  const quantityInput = document.querySelector('#quantity_storage');
+  const incrementButton = document.querySelector('.increment');
+  const decrementButton = document.querySelector('.decrement');
+
+  // Add click event listeners to the buttons
+  incrementButton.addEventListener('click', () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+  });
+
+  decrementButton.addEventListener('click', () => {
+    quantityInput.value = parseInt(quantityInput.value) - 1;
+  });
+</script>
