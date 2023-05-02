@@ -1,0 +1,104 @@
+#js
+<script>
+    function incrementValue() {
+        var value = parseInt(document.getElementById('quantity_storage').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('quantity_storage').value = value;
+        document.getElementById('new_quantity').value = value;
+    }
+
+    function decrementValue() {
+        var value = parseInt(document.getElementById('quantity_storage').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if(value > 0){
+            value--;
+        }
+        document.getElementById('quantity_storage').value = value;
+        document.getElementById('new_quantity').value = value;
+    }
+</script>
+
+#Edit item process
+@app.route('/viewStorage/editStorageProcess', methods=['GET','POST']) 
+@login_required
+def editStorageProcess():
+    data_recordStorage = recordstorage.query.get(request.form.get('no_storage'))
+    #no_storage, id_storage, detail_storage, quantity_storage, remark_storage
+    data_recordStorage.id_storage = request.form['id_storage']
+    data_recordStorage.env_storage = request.form['env_storage']
+    data_recordStorage.detail_storage = request.form['detail_storage']
+    data_recordStorage.quantity_storage = request.form['new_quantity']
+    data_recordStorage.remark_storage = request.form['remark_storage']
+
+    db.session.commit()
+
+    flash('Edit Data Success')
+
+    return redirect(url_for('viewStorage'))
+
+#html
+<div class="form-label">
+    <label>Quantity:</label>
+    <div class="quantity-field">
+        <button type="button" class="quantity-button minus" onclick="decrementValue()">-</button>
+        <input class="quantity-input" type="text" name="quantity_storage" id="quantity_storage" value="{{ data.quantity_storage }}">
+        <button type="button" class="quantity-button plus" onclick="incrementValue()">+</button>
+    </div>
+</div>
+
+#css
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+}
+
+.quantity-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #eee;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-button:hover {
+  background-color: #ccc;
+}
+
+.quantity-button:active {
+  background-color: #aaa;
+}
+
+.increment {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.decrement {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#html 2
+<div class="form-label">
+  <label>Quantity:</label>
+  <div class="quantity-container">
+    <button class="quantity-button decrement">-</button>
+    <input class="form-text quantity-input" type="text" name="quantity_storage" id="quantity_storage" value="{{ data.quantity_storage }}">
+    <button class="quantity-button increment">+</button>
+  </div>
+</div>
+
+
+
+
+
+
